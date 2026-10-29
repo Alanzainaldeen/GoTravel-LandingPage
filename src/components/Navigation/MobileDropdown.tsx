@@ -1,5 +1,6 @@
 import {motion} from "motion/react"
 import { NavigationLink } from "../../utils/contentTypes";
+import { useMenuContext } from "../../context/MobileMenuContext";
 
 interface MobileDropdownProps {
     links: NavigationLink[] | undefined;
@@ -8,6 +9,9 @@ interface MobileDropdownProps {
 export default function MobileDropdown({
     links,
 }: MobileDropdownProps) {
+    const { setMenuOpened } = useMenuContext();
+    const closeMenu = () => setMenuOpened(false);
+
     return (
         <motion.ul 
         initial={{ opacity: 0, height: 0}}
@@ -22,6 +26,7 @@ export default function MobileDropdown({
                 >
                     <a
                         href={link.href}
+                        onClick={closeMenu}
                         className="block"
                     >
                         {link.text}

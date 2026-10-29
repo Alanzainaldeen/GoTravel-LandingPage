@@ -8,7 +8,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { useMenuContext } from "../../context/MobileMenuContext";
 
 export default function MobileMenu() {
-    const {menuOpened} = useMenuContext();
+    const { menuOpened, setMenuOpened } = useMenuContext();
+    const closeMenu = () => setMenuOpened(false);
 
     const [activeLinkId, setActiveLinkId] = useState<number | null>(null);
 
@@ -48,9 +49,10 @@ export default function MobileMenu() {
             className="flex h-full w-full max-w-96 flex-col items-start
                 gap-y-12 overflow-y-auto bg-white p-6 pl-7">
 
-                {/* زر الإغلاق */}
                 <div className="flex w-full justify-end">
-                    <Close />
+                    <button onClick={closeMenu}>
+                        <Close />
+                    </button>
                 </div>
 
                 {/* روابط القائمة */}
@@ -111,6 +113,7 @@ export default function MobileMenu() {
                                     ) : (
                                         <a
                                             href={link.href}
+                                            onClick={closeMenu}
                                             className="text-grey-600"
                                         >
                                             {link.text}
@@ -134,9 +137,7 @@ export default function MobileMenu() {
                 {/* زر الانضمام */}
                         <a
                     href="#join-now"
-                    onClick={() => {
-                        // toggleMenu(false); // If menu context is available
-                    }}
+                    onClick={closeMenu}
                     className="cursor-pointer rounded-[.625rem]
                         bg-primary-700 px-8 py-3 font-medium text-white
                         transition-all duration-200 hover:bg-primary-800 text-center"

@@ -32,8 +32,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <MenuContextProvider>
         <Page>
+          <Navigation />
+          
           <Header>
-            <Navigation />
             <Hero />
             <MobileMenu />
           </Header>
